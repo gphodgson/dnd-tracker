@@ -3,11 +3,13 @@ import { FieldValues, useForm } from "react-hook-form";
 import { z } from "zod";
 import Enemy from "../types/Enemy";
 import { v4 as uuidv4 } from "uuid";
+import { AiOutlineCrown } from "react-icons/ai";
 
 const schema = z.object({
   name: z.string().min(1),
   startHP: z.number().min(1),
   init: z.number().min(1),
+  hero: z.boolean(),
 });
 
 interface Props {
@@ -33,6 +35,7 @@ const NewEnemyForm = ({ callback }: Props) => {
       hp: data.startHP,
       init: data.init,
       massNumber: 1,
+      hero: data.hero,
     });
   };
 
@@ -60,11 +63,16 @@ const NewEnemyForm = ({ callback }: Props) => {
           name="init"
           className="form-control"
         />
-        <button
-          disabled={!isValid}
-          type="submit"
-          className="btn btn-outline-primary"
-        >
+        <div className="input-group-text bg-warning">
+          <AiOutlineCrown />
+          <span className="m-1"></span>
+          <input
+            {...register("hero")}
+            type="checkbox"
+            className="form-check-input mt-0"
+          />
+        </div>
+        <button disabled={!isValid} type="submit" className="btn btn-primary">
           Add Creature
         </button>
       </div>

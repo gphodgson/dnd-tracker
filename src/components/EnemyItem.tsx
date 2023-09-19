@@ -2,6 +2,7 @@ import Enemy from "../types/Enemy";
 import { SlClose } from "react-icons/sl";
 import { GiDiceTarget } from "react-icons/gi";
 import { ChangeEvent, useState } from "react";
+import { AiOutlineCrown } from "react-icons/ai";
 
 interface Props {
   data: Enemy;
@@ -57,9 +58,20 @@ const EnemyItem = ({
   return (
     <div className="input-group mb-2">
       <span className="input-group-text">{data.massNumber}</span>
-      <span className="input-group-text">
-        <b>{data.name}</b>
-      </span>
+      {data.hero ? (
+        <span className="input-group-text bg-warning">
+          <b>
+            <AiOutlineCrown />
+            <span className="m-1"></span>
+            {data.name}
+          </b>
+        </span>
+      ) : (
+        <span className="input-group-text">
+          <b>{data.name}</b>
+        </span>
+      )}
+
       <button
         className="btn btn-secondary dropdown-toggle"
         type="button"

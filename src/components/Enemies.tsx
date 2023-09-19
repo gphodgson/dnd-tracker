@@ -30,9 +30,7 @@ const Enemies = () => {
   const handleInitReroll = (id: string) => {
     setEnemiesList(
       enemiesList.map((enemy) =>
-        enemy.id === id
-          ? { ...enemy, init: Math.floor(Math.random() * 20) }
-          : enemy
+        enemy.id === id ? { ...enemy, init: getRandomRoll() } : enemy
       )
     );
   };
@@ -72,9 +70,13 @@ const Enemies = () => {
   const handleRollAll = () => {
     setEnemiesList(
       enemiesList.map((enemy) => {
-        return { ...enemy, init: Math.floor(Math.random() * 20) };
+        return { ...enemy, init: getRandomRoll() };
       })
     );
+  };
+
+  const getRandomRoll = (): number => {
+    return Math.floor(Math.random() * 20) + 1;
   };
 
   return (
