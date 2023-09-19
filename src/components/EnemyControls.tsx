@@ -1,12 +1,17 @@
 interface Props {
   onSort: () => void;
+  onRollAll: () => void;
 }
 
-const EnemyControls = ({ onSort }: Props) => {
+const EnemyControls = ({ onSort, onRollAll }: Props) => {
   return (
     <>
-      <button className="btn btn-primary" onClick={onSort}>
+      <button className="btn btn-primary m-3" onClick={onSort}>
         Sort By Initiative
+      </button>
+
+      <button className="btn btn-primary" onClick={onRollAll}>
+        Roll all
       </button>
     </>
   );
