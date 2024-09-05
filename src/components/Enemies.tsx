@@ -1,8 +1,11 @@
-import { useState } from "react";
+import {useState } from "react";
+
+
 import NewEnemyForm from "./NewEnemyForm";
 import Enemy from "../types/Enemy";
 import EnemyList from "./EnemyList";
 import EnemyControls from "./EnemyControls";
+import SaveHandler from "../logic/saveHandler";
 
 type MassList = {
   [index: string]: number;
@@ -11,7 +14,7 @@ type MassList = {
 const Enemies = () => {
   const [enemiesList, setEnemiesList] = useState<Enemy[]>([]);
   const [massList, setMassList] = useState<MassList>({});
-  // const massList = new Map();
+  const saveHandler = new SaveHandler();
 
   const onAddEnemy = (enemy: Enemy) => {
     let newList = { ...massList };
@@ -42,6 +45,16 @@ const Enemies = () => {
       )
     );
   };
+
+  const handleSaveToFile = () => {
+    saveHandler.save(enemiesList);
+  }
+
+  const handleLoad = (value:string) => {
+    const newList = saveHandler.load(value);
+    setEnemiesList(newList);
+  }
+
 
   const handleHpSet = (id: string, amount: number) => {
     setEnemiesList(
@@ -92,7 +105,12 @@ const Enemies = () => {
           onDelete={handleDelete}
           enemies={enemiesList}
         />
-        <EnemyControls onSort={handleSort} onRollAll={handleRollAll} />
+        <EnemyControls 
+          onSort={handleSort} 
+          onRollAll={handleRollAll} 
+          onSaveToFile={handleSaveToFile} 
+          onLoad={handleLoad}
+        />
       </div>
     </>
   );
