@@ -5,7 +5,8 @@ import NewEnemyForm from "./NewEnemyForm";
 import Enemy from "../types/Enemy";
 import EnemyList from "./EnemyList";
 import EnemyControls from "./EnemyControls";
-import SaveHandler from "../logic/saveHandler";
+import SaveHandler from "../logic/SaveHandler";
+import Condition from "../types/Condition";
 
 type MassList = {
   [index: string]: number;
@@ -29,6 +30,14 @@ const Enemies = () => {
 
     setEnemiesList([...enemiesList, enemy]);
   };
+
+  const onConditionAdded = (id:string, condition:Condition) => {
+    setEnemiesList(
+      enemiesList.map((enemy) =>
+        enemy.id === id ? { ...enemy, conditions: [...enemy.conditions, condition] } : enemy
+      )
+    );
+  }
 
   const handleInitReroll = (id: string) => {
     setEnemiesList(
@@ -103,6 +112,7 @@ const Enemies = () => {
           onHpSet={handleHpSet}
           onHpEditBy={handleHpEditBy}
           onDelete={handleDelete}
+          onConditionAdded={onConditionAdded}
           enemies={enemiesList}
         />
         <EnemyControls 
