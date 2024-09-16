@@ -1,4 +1,5 @@
 import Condition from "../types/Condition";
+import { SlClose } from "react-icons/sl";
 
 interface Props{
     condition:Condition
@@ -26,7 +27,8 @@ const ConditionItem = ({condition}:Props) => {
                     className="form-control"
                     value={condition.description}
                     readOnly
-                />  
+                />
+
             </div>
         </>
     );
