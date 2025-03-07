@@ -36,6 +36,7 @@ const NewEnemyForm = ({ callback }: Props) => {
       init: data.init,
       massNumber: 1,
       hero: data.hero,
+      conditions: []
     });
   };
 

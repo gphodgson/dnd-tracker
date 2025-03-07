@@ -1,3 +1,4 @@
+import Condition from "../types/Condition";
 import Enemy from "../types/Enemy";
 import EnemyItem from "./EnemyItem";
 
@@ -8,6 +9,7 @@ interface Props {
   onHpSet: (id: string, amount: number) => void;
   onHpEditBy: (id: string, amount: number) => void;
   onDelete: (id: string) => void;
+  onConditionAdded: (id:string, condition:Condition) => void;
 }
 
 const EnemyList = ({
@@ -17,10 +19,10 @@ const EnemyList = ({
   onHpEditBy,
   onInitSet,
   onDelete,
+  onConditionAdded
 }: Props) => {
-  const handleInitReroll = (id: string) => {
-    onInitReroll(id);
-  };
+  const handleInitReroll = (id: string) => onInitReroll(id);
+    
   const handleHpSet = (id: string, amount: number) => onHpSet(id, amount);
   const handleHpEditBy = (id: string, amount: number) => onHpEditBy(id, amount);
 
@@ -30,7 +32,7 @@ const EnemyList = ({
 
   return (
     <>
-      <form action="" className="row">
+      <div action="" className="row">
         {enemies.map((enemy) => (
           <EnemyItem
             onInitReroll={handleInitReroll}
@@ -38,11 +40,12 @@ const EnemyList = ({
             onHpEditBy={handleHpEditBy}
             onInitSet={handleInitSet}
             onDelete={handleDelete}
+            onConditionAdded={onConditionAdded}
             key={enemy.id}
             data={enemy}
           />
         ))}
-      </form>
+      </div>
     </>
   );
 };

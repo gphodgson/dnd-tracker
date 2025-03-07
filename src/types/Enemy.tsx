@@ -1,3 +1,5 @@
+import Condition from "./Condition";
+
 interface Enemy {
   id: string;
   name: string;
@@ -6,6 +8,7 @@ interface Enemy {
   massNumber: number;
   notes?: string;
   hero: boolean;
+  conditions: Array<Condition>;
 }
 
 export default Enemy;
